@@ -18,11 +18,22 @@ module.exports = function (grunt) {
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
-    dist: 'dist'
+    dist: '../public'
   };
+
+  var modRewrite = require('connect-modrewrite');
 
   // Define the configuration for all the tasks
   grunt.initConfig({
+
+    shell: {
+      startRailsServer: {
+        command: 'rails server',
+        options: {
+          async: true
+        }
+      }
+    },
 
     // Project settings
     yeoman: appConfig,
@@ -88,6 +99,8 @@ module.exports = function (grunt) {
 
             // Setup the proxy
             var middlewares = [
+              modRewrite(['!/api|/assets|\\..+$ /index.html']),
+
               require('grunt-connect-proxy/lib/utils').proxyRequest,
               connect.static('.tmp'),
               connect().use(
@@ -182,7 +195,7 @@ module.exports = function (grunt) {
     // Automatically inject Bower components into the app
     wiredep: {
       options: {
-        cwd: '<%= yeoman.app %>'
+        // cwd: '<%= yeoman.app %>'
       },
       app: {
         src: ['<%= yeoman.app %>/index.html'],
@@ -331,7 +344,7 @@ module.exports = function (grunt) {
     // ngmin tries to make the code safe for minification automatically by
     // using the Angular long form for dependency injection. It doesn't work on
     // things like resolve or inject so those have to be done manually.
-    ngmin: {
+    ngAnnotate: {
       dist: {
         files: [{
           expand: true,
@@ -447,7 +460,7 @@ module.exports = function (grunt) {
     'concurrent:dist',
     'autoprefixer',
     'concat',
-    'ngmin',
+    'ngAnnotate:dist',
     'copy:dist',
     'cdnify',
     'cssmin',
@@ -464,4 +477,6 @@ module.exports = function (grunt) {
   ]);
 
   grunt.loadNpmTasks('grunt-connect-proxy');
+  grunt.loadNpmTasks('grunt-shell-spawn');
+  grunt.loadNpmTasks('grunt-ng-annotate');
 };

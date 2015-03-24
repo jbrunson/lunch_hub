@@ -12,3 +12,10 @@ RSpec.describe Group, type: :model do
     it { should_not be_valid }
   end
 end
+
+feature 'Groups', js: true do
+  scenario 'view' do
+    visit '/groups'
+    expect(page).to have_content('Group One')
+  end
+end

@@ -8,20 +8,25 @@
  *
  * Main module of the application.
  */
-angular
-  .module('fakeLunchHubApp', [
+var app = angular.module('fakeLunchHubApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ng-token-auth'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $locationProvider) {
+    $locationProvider.html5Mode(true);
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
+      })
+      .when('/sign_in', {
+        templateUrl: 'views/user_sessions/new.html',
+        controller: 'UserSessionsCtrl'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
@@ -41,3 +46,10 @@ angular
       'update': { method: 'PUT' }
     });
   }]);
+
+  app.run(['$rootScope', '$location', function($rootScope, $location) {
+    $rootScope.$on('auth:login-success', function() {
+      $location.path('/');
+    });
+  }]);
+  

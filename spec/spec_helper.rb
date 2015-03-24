@@ -40,6 +40,13 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  config.before(:all, type: :feature) do
+    system("grunt build --gruntfile #{Rails.configuration.gruntfile_location}")
+  end
+
+  config.after(:all, type: :feature) do
+    FileUtils.rm_rf(Rails.root.join("public"))
+  end
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
