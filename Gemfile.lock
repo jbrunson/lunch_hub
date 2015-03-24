@@ -60,7 +60,7 @@ GEM
       sass (>= 3.3.0, < 3.5)
     compass-import-once (1.0.5)
       sass (>= 3.2, < 3.5)
-    database_cleaner (1.4.0)
+    database_cleaner (1.4.1)
     devise (3.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -80,7 +80,7 @@ GEM
       railties (>= 3.0.0)
     faker (1.4.3)
       i18n (~> 0.5)
-    ffi (1.9.6)
+    ffi (1.9.8)
     globalid (0.3.3)
       activesupport (>= 4.1.0)
     hashie (3.4.0)
@@ -158,7 +158,7 @@ GEM
     rspec-support (3.2.2)
     rubyzip (1.1.7)
     sass (3.4.13)
-    selenium-webdriver (2.44.0)
+    selenium-webdriver (2.45.0)
       childprocess (~> 0.5)
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
@@ -199,6 +199,7 @@ DEPENDENCIES
   rack-rewrite
   rails (= 4.2.0)
   rails-api
+  responders (~> 2.0)
   rspec-rails
   selenium-webdriver
   spring

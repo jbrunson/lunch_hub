@@ -5,6 +5,8 @@ gem 'rails', '4.2.0'
 gem 'rails-api'
 gem 'spring', :group => :development
 gem 'pg'
+gem 'responders', '~> 2.0'
+
 gem 'devise_token_auth'
 gem 'omniauth'
 # Use this to allow use of HTML5 pushState

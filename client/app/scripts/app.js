@@ -34,7 +34,12 @@ var app = angular.module('fakeLunchHubApp', [
       })
       .when('/groups', {
         templateUrl: 'views/groups.html',
-        controller: 'GroupsCtrl'
+        controller: 'GroupsCtrl',
+        resolve: {
+          auth: ['$auth', function($auth) {
+            return $auth.validateUser();
+          }]
+        }
       })
       .otherwise({
         redirectTo: '/'
